@@ -1,0 +1,116 @@
+---
+title: "Assignment"
+author: "lokeshwaran"
+date: "2024-07-10"
+output:
+  html_document: default
+  pdf_document: default
+---
+```{r}
+library(tidyverse)
+```
+```{r}
+?Auto
+```
+```{r}
+?College
+```
+```{r}
+??Boston
+```
+```{r}
+library(ISLR)
+```
+
+```{r}
+data(Auto)
+```
+```{r}
+str(Auto)
+```
+a)
+```{r}
+quantitative_predictors <- names(Auto)[sapply(Auto, is.numeric)]
+qualitative_predictors <- names(Auto)[sapply(Auto, is.factor)]
+cat("Quantitative Predictors:\n")
+print(quantitative_predictors)
+
+cat("\nQualitative Predictors:\n")
+print(qualitative_predictors)
+```
+
+
+b)
+```{r}
+ranges <- sapply(Auto[, sapply(Auto, is.numeric)], function(x) diff(range(x)))
+print("Range of each quantitative predictor:")
+print(ranges)
+
+```
+
+c)
+```{r}
+means <- sapply(Auto[, sapply(Auto, is.numeric)], mean)
+std_devs <- sapply(Auto[, sapply(Auto, is.numeric)], sd)
+
+print("Mean of each quantitative predictor:")
+print(means)
+
+print("Standard deviation of each quantitative predictor:")
+print(std_devs)
+
+```
+
+d)
+
+```{r}
+subset_auto <- Auto[-(10:85), ]
+```
+```{r}
+subset_ranges <- sapply(subset_auto[, sapply(subset_auto, is.numeric)], function(x) diff(range(x)))
+subset_means <- sapply(subset_auto[, sapply(subset_auto, is.numeric)], mean)
+subset_std_devs <- sapply(subset_auto[, sapply(subset_auto, is.numeric)], sd)
+
+print("Subset analysis - Range of each quantitative predictor:")
+print(subset_ranges)
+
+print("Subset analysis - Mean of each quantitative predictor:")
+print(subset_means)
+```
+e)
+```{r}
+library(ggplot2)
+```
+```{r}
+
+ggplot(Auto, aes(x = horsepower, y = mpg)) +
+  geom_point() +
+  labs(title = "Relationship between Horsepower and MPG")
+
+```
+
+
+f)
+```{r}
+
+ggplot(Auto, aes(x = horsepower, y = mpg)) +
+  geom_point() +
+  labs(title = "Relationship between Horsepower and MPG")
+
+ggplot(Auto, aes(x = weight, y = mpg)) +
+  geom_point() +
+  labs(title = "Relationship between Weight and MPG")
+
+ggplot(Auto, aes(x = acceleration, y = mpg)) +
+  geom_point() +
+  labs(title = "Relationship between Acceleration and MPG")
+
+```
+Weight (wt): From the scatter plot, we observe a strong negative correlation between wt and mpg, indicating that heavier cars tend to have lower gas mileage. This suggests that wt could be a useful predictor in predicting mpg, as it provides information about the car's weight affecting fuel efficiency.
+
+Horsepower (hp): The scatter plot shows a negative correlation between hp and mpg, suggesting that cars with higher horsepower might have lower mileage. This relationship can be attributed to more powerful engines consuming more fuel, making hp a potentially useful predictor in predicting mpg.
+
+Acceleration (acc): From the scatter plot, there appears to be a slight positive correlation between acceleration (acc) and mpg, indicating that cars with higher acceleration values may achieve better mileage. This relationship suggests that quicker acceleration might be associated with more efficient engine performance or aerodynamic design, making acc a potentially useful predictor in predicting mpg.
+
+```
+
